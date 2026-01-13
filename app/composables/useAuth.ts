@@ -1,14 +1,4 @@
-// Types pour l'authentification
-export type UserRole = 'admin' | 'chef_projet' | 'developpeur' | 'csm_dt_dta'
-
-export interface AuthUser {
-  id: string
-  email: string
-  name: string
-  avatar?: string
-  role: UserRole
-  createdAt: Date
-}
+import type { AuthUser, UserRole } from '@/lib/types'
 
 // État global d'authentification (mock)
 const currentUser = ref<AuthUser | null>(null)
