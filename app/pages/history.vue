@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Search, Clock, User, Package, FileText } from 'lucide-vue-next'
 
 definePageMeta({
-  middleware: 'auth',
+  middleware: ['auth', 'rbac'],
 })
 
 const searchQuery = ref('')
