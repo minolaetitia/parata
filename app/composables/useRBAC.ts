@@ -1,20 +1,4 @@
-// Types RBAC détaillés
-export type UserRole = 'admin' | 'chef_projet' | 'developpeur' | 'csm_dt_dta'
-
-export type Permission =
-  | 'manage_users'
-  | 'manage_roles'
-  | 'manage_projects'
-  | 'assign_team_members'
-  | 'manage_materials'
-  | 'view_team'
-  | 'view_team_history'
-  | 'view_own_projects'
-  | 'view_own_history'
-  | 'view_projects'
-  | 'view_reports'
-  | 'add_comments'
-  | 'edit_projects'
+import type { UserRole, Permission } from '@/lib/types'
 
 // Mapping des rôles aux permissions
 export const rolePermissions: Record<UserRole, Permission[]> = {
