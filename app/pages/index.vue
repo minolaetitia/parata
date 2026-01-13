@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { LayoutDashboard, Users, Package, TrendingUp, Plus } from 'lucide-vue-next'
 
 definePageMeta({
-  middleware: 'auth',
+  middleware: ['auth', 'rbac'],
 })
 
 const { currentUser, hasPermission } = useAuth()
