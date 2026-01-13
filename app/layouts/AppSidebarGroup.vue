@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-vue-next'
+import { LayoutDashboard, Users, Package, History, LogOut } from 'lucide-vue-next'
 import {
-  Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
@@ -9,56 +8,69 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from '@/components/ui/sidebar'
 
 // Menu items.
 const items = [
   {
-    title: 'Home',
-    url: '#',
-    icon: Home,
+    title: 'Tableau de bord',
+    url: '/',
+    icon: LayoutDashboard,
   },
   {
-    title: 'Inbox',
-    url: '#',
-    icon: Inbox,
+    title: 'Projets',
+    url: '/projects',
+    icon: LayoutDashboard,
   },
   {
-    title: 'Calendar',
-    url: '#',
-    icon: Calendar,
+    title: 'Collaborateurs',
+    url: '/team',
+    icon: Users,
   },
   {
-    title: 'Search',
-    url: '#',
-    icon: Search,
+    title: 'Stock matériel',
+    url: '/materials',
+    icon: Package,
   },
   {
-    title: 'Settings',
-    url: '#',
-    icon: Settings,
+    title: 'Historique',
+    url: '/history',
+    icon: History,
   },
 ]
 </script>
 
 <template>
-  <Sidebar>
+  <div>
     <SidebarContent>
       <SidebarGroup>
-        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarGroupLabel>Navigation</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             <SidebarMenuItem v-for="item in items" :key="item.title">
               <SidebarMenuButton as-child>
-                <a :href="item.url">
+                <NuxtLink :to="item.url">
                   <component :is="item.icon" />
                   <span>{{ item.title }}</span>
-                </a>
+                </NuxtLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
     </SidebarContent>
-  </Sidebar>
+    <SidebarFooter>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton as-child>
+            <button class="flex w-full cursor-pointer items-center gap-2">
+              <LogOut class="h-4 w-4" />
+              <span>Déconnexion</span>
+            </button>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarFooter>
+  </div>
 </template>
