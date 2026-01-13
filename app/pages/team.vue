@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Plus, Search, Edit2, Trash2, Mail, Briefcase, Activity } from 'lucide-vue-next'
 
 definePageMeta({
-  middleware: 'auth',
+  middleware: ['auth', 'rbac'],
 })
 
 const { hasPermission } = useAuth()
