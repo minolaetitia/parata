@@ -62,16 +62,7 @@ const items = [
       </SidebarGroup>
     </SidebarContent>
     <SidebarFooter>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton as-child>
-            <button class="flex w-full cursor-pointer items-center gap-2">
-              <LogOut class="h-4 w-4" />
-              <span>Déconnexion</span>
-            </button>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
+      <UserProfile />
     </SidebarFooter>
   </div>
 </template>
