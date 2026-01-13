@@ -1,0 +1,7 @@
+# Routes API Nitro
+# À implémenter:
+# - server/api/auth/*.ts
+# - server/api/projects/*.ts
+# - server/api/materials/*.ts
+# - server/api/team/*.ts
+# - server/api/history/*.ts
