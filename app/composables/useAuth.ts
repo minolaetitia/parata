@@ -16,31 +16,40 @@ const isAuthenticated = ref(false)
 const isLoading = ref(false)
 
 export function useAuth() {
+  // Mapper les emails aux rôles (pour la démo)
+  const getRoleByEmail = (email: string): UserRole => {
+    if (email.includes('alice')) return 'admin'
+    if (email.includes('bob')) return 'chef_projet'
+    if (email.includes('charlie')) return 'developpeur'
+    if (email.includes('diana') || email.includes('eva')) return 'csm_dt_dta'
+    return 'developpeur' // Rôle par défaut
+  }
+
   // Login avec Google (mock)
   const loginWithGoogle = async (name: string, email: string) => {
     isLoading.value = true
     try {
       // Simulation d'un délai réseau
       await new Promise(resolve => setTimeout(resolve, 800))
-      
-      // Créer un utilisateur mock
+
+      // Créer un utilisateur mock avec rôle basé sur l'email
       const user: AuthUser = {
         id: `user_${Math.random().toString(36).substr(2, 9)}`,
         email,
         name,
         avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
-        role: 'developpeur', // Rôle par défaut pour les nouveaux utilisateurs
+        role: getRoleByEmail(email),
         createdAt: new Date(),
       }
-      
+
       currentUser.value = user
       isAuthenticated.value = true
-      
+
       // Simuler stockage de session
       if (process.client) {
         localStorage.setItem('auth_user', JSON.stringify(user))
       }
-      
+
       return user
     } catch (error) {
       console.error('Erreur lors de la connexion:', error)
