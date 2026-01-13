@@ -14,7 +14,7 @@ import {
 } from 'lucide-vue-next'
 
 definePageMeta({
-  middleware: 'auth',
+  middleware: ['auth', 'rbac'],
 })
 
 const { hasPermission } = useAuth()
