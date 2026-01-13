@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutDashboard, Users, Package, History, LogOut } from 'lucide-vue-next'
+import { LayoutDashboard, Users, Package, History } from 'lucide-vue-next'
 import {
   SidebarContent,
   SidebarGroup,
@@ -10,6 +10,7 @@ import {
   SidebarMenuItem,
   SidebarFooter,
 } from '@/components/ui/sidebar'
+import UserProfile from '@/components/UserProfile.vue'
 
 // Menu items.
 const items = [
