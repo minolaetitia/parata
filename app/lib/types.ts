@@ -1,0 +1,87 @@
+// Types de rôles utilisateur
+export type UserRole = 'admin' | 'chef_projet' | 'developpeur' | 'csm_dt_dta'
+
+// Utilisateur authentifié
+export interface AuthUser {
+  id: string
+  email: string
+  name: string
+  avatar?: string
+  role: UserRole
+  createdAt: Date
+}
+
+// Permissions granulaires
+export type Permission =
+  | 'manage_users'
+  | 'manage_roles'
+  | 'manage_projects'
+  | 'assign_team_members'
+  | 'manage_materials'
+  | 'view_team'
+  | 'view_team_history'
+  | 'view_own_projects'
+  | 'view_own_history'
+  | 'view_projects'
+  | 'view_reports'
+  | 'add_comments'
+  | 'edit_projects'
+
+// Projet
+export interface Project {
+  id: number
+  name: string
+  description: string
+  status: 'Planifié' | 'En cours' | 'Complété' | 'En attente'
+  startDate: string
+  endDate: string
+  team_size: number
+  progress: number
+}
+
+// Collaborateur/Membre de l'équipe
+export interface TeamMember {
+  id: number
+  name: string
+  email: string
+  role: string
+  status: 'Actif' | 'Inactif' | 'Congé' | 'Archivé'
+  projects: number
+  skills: string[]
+  joinDate: string
+  avatar: string
+}
+
+// Matériel
+export interface Material {
+  id: number
+  name: string
+  type: string
+  serialNumber: string
+  status: 'Disponible' | 'Attribué' | 'HS' | 'En réparation'
+  location: string
+  assignedTo: string | null
+  assignedDate: string | null
+  purchaseDate: string
+}
+
+// Événement d'historique
+export interface HistoryEvent {
+  id: number
+  type: string
+  title: string
+  description: string
+  user: string
+  timestamp: string
+  icon: string
+}
+
+// Commentaire
+export interface Comment {
+  id: number
+  content: string
+  author: string
+  timestamp: string
+  resourceType: 'project' | 'material'
+  resourceId: number
+}
