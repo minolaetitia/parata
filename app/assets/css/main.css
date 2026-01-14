@@ -127,3 +127,48 @@
     cursor: pointer;
   }
 }
+
+/* Styles utilitaires pour la responsivité */
+@layer utilities {
+  /* Empêcher le zoom sur les inputs mobiles */
+  @media (max-width: 640px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Scroll horizontal smooth pour les tableaux */
+  .horizontal-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  /* Masquer la scrollbar par défaut sauf hover */
+  .horizontal-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .horizontal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .horizontal-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+
+  .horizontal-scroll:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Amélioration des safe areas pour mobile */
+  @supports (padding: max(0px)) {
+    .safe-area-padding {
+      padding-left: max(0.5rem, env(safe-area-inset-left));
+      padding-right: max(0.5rem, env(safe-area-inset-right));
+    }
+  }
+}

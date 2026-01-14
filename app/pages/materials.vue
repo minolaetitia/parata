@@ -145,84 +145,85 @@ const handleDelete = (id: number) => {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4 sm:space-y-6">
     <!-- Header -->
-    <div class="flex items-center justify-between">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-900">Stock Matériel</h1>
-        <p class="mt-1 text-gray-600">Gérez et suivez l'inventaire de votre matériel.</p>
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="flex-1">
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Stock Matériel</h1>
+        <p class="mt-1 text-sm sm:text-base text-gray-600">Gérez et suivez l'inventaire de votre matériel.</p>
       </div>
-      <Button v-if="hasPermission('manage_projects')" size="lg">
-        <Plus class="mr-2 h-4 w-4" />
-        Ajouter du matériel
+      <Button v-if="hasPermission('manage_projects')" size="sm" class="w-full sm:w-auto">
+        <Plus class="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+        <span class="text-sm">Ajouter du matériel</span>
       </Button>
     </div>
 
     <!-- Statistiques -->
-    <div class="grid gap-4 md:grid-cols-4">
+    <div class="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
       <Card>
-        <CardHeader class="pb-2">
-          <CardTitle class="text-sm font-medium">Total</CardTitle>
+        <CardHeader class="pb-1 sm:pb-2">
+          <CardTitle class="text-xs sm:text-sm font-medium">Total</CardTitle>
         </CardHeader>
         <CardContent>
-          <div class="text-2xl font-bold">{{ materialCount.total }}</div>
-          <p class="text-xs text-gray-600">Éléments en stock</p>
+          <div class="text-xl sm:text-2xl font-bold">{{ materialCount.total }}</div>
+          <p class="text-[10px] sm:text-xs text-gray-600">Éléments en stock</p>
         </CardContent>
       </Card>
       <Card>
-        <CardHeader class="pb-2">
-          <CardTitle class="text-sm font-medium text-green-800">Disponible</CardTitle>
+        <CardHeader class="pb-1 sm:pb-2">
+          <CardTitle class="text-xs sm:text-sm font-medium text-green-800">Disponible</CardTitle>
         </CardHeader>
         <CardContent>
-          <div class="text-2xl font-bold text-green-600">{{ materialCount.available }}</div>
-          <p class="text-xs text-gray-600">Prêts à l'emploi</p>
+          <div class="text-xl sm:text-2xl font-bold text-green-600">{{ materialCount.available }}</div>
+          <p class="text-[10px] sm:text-xs text-gray-600">Prêts à l'emploi</p>
         </CardContent>
       </Card>
       <Card>
-        <CardHeader class="pb-2">
-          <CardTitle class="text-sm font-medium text-blue-800">Attribué</CardTitle>
+        <CardHeader class="pb-1 sm:pb-2">
+          <CardTitle class="text-xs sm:text-sm font-medium text-blue-800">Attribué</CardTitle>
         </CardHeader>
         <CardContent>
-          <div class="text-2xl font-bold text-blue-600">{{ materialCount.assigned }}</div>
-          <p class="text-xs text-gray-600">Actuellement utilisé</p>
+          <div class="text-xl sm:text-2xl font-bold text-blue-600">{{ materialCount.assigned }}</div>
+          <p class="text-[10px] sm:text-xs text-gray-600">Actuellement utilisé</p>
         </CardContent>
       </Card>
       <Card>
-        <CardHeader class="pb-2">
-          <CardTitle class="text-sm font-medium text-red-800">HS</CardTitle>
+        <CardHeader class="pb-1 sm:pb-2">
+          <CardTitle class="text-xs sm:text-sm font-medium text-red-800">HS</CardTitle>
         </CardHeader>
         <CardContent>
-          <div class="text-2xl font-bold text-red-600">{{ materialCount.defective }}</div>
-          <p class="text-xs text-gray-600">En réparation</p>
+          <div class="text-xl sm:text-2xl font-bold text-red-600">{{ materialCount.defective }}</div>
+          <p class="text-[10px] sm:text-xs text-gray-600">En réparation</p>
         </CardContent>
       </Card>
     </div>
 
     <!-- Filtres -->
     <Card>
-      <CardContent class="pt-6">
-        <div class="space-y-4">
+      <CardContent class="pt-4 sm:pt-6">
+        <div class="space-y-3 sm:space-y-4">
           <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">Rechercher</label>
+            <label class="mb-1 sm:mb-2 block text-xs sm:text-sm font-medium text-gray-700">Rechercher</label>
             <div class="relative">
-              <Search class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Search class="absolute left-2 sm:left-3 top-1/2 h-3 w-3 sm:h-4 sm:w-4 -translate-y-1/2 text-gray-400" />
               <Input
                 v-model="searchQuery"
                 type="text"
                 placeholder="Nom, numéro de série, type..."
-                class="pl-10"
+                class="pl-8 sm:pl-10 text-sm"
               />
             </div>
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">Statut</label>
-            <div class="flex flex-wrap gap-2">
+            <label class="mb-1 sm:mb-2 block text-xs sm:text-sm font-medium text-gray-700">Statut</label>
+            <div class="flex flex-wrap gap-1.5 sm:gap-2">
               <Button
                 v-for="status in statuses"
                 :key="status"
                 :variant="statusFilter === status ? 'default' : 'outline'"
                 size="sm"
+                class="text-xs sm:text-sm"
                 @click="statusFilter = statusFilter === status ? null : status"
               >
                 {{ status }}
@@ -233,8 +234,8 @@ const handleDelete = (id: number) => {
       </CardContent>
     </Card>
 
-    <!-- Liste du matériel -->
-    <div class="overflow-x-auto">
+    <!-- Liste du matériel - Version Desktop -->
+    <div class="hidden md:block overflow-x-auto">
       <table class="w-full">
         <thead>
           <tr class="border-b bg-gray-50">
@@ -292,13 +293,60 @@ const handleDelete = (id: number) => {
       <!-- Message vide -->
       <div v-if="filteredMaterials.length === 0" class="bg-white px-6 py-12 text-center">
         <Package class="mx-auto h-12 w-12 text-gray-400" />
-        <h3 class="mt-4 text-lg font-medium text-gray-900">Aucun matériel trouvé</h3>
-        <p class="mt-2 text-gray-600">Ajoutez du matériel à votre inventaire.</p>
+        <h3 class="mt-4 text-base sm:text-lg font-medium text-gray-900">Aucun matériel trouvé</h3>
+        <p class="mt-2 text-sm text-gray-600">Ajoutez du matériel à votre inventaire.</p>
         <Button class="mt-4">
           <Plus class="mr-2 h-4 w-4" />
           Ajouter du matériel
         </Button>
       </div>
+    </div>
+
+    <!-- Liste du matériel - Version Mobile -->
+    <div class="md:hidden space-y-3">
+      <Card v-for="material in filteredMaterials" :key="material.id">
+        <CardContent class="pt-4">
+          <div class="space-y-2">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <h3 class="font-semibold text-sm text-gray-900">{{ material.name }}</h3>
+                <p class="text-xs text-gray-600 mt-0.5">{{ material.type }}</p>
+              </div>
+              <span :class="getStatusColor(material.status)" class="rounded-full px-2 py-0.5 text-[10px] font-medium whitespace-nowrap ml-2">
+                {{ material.status }}
+              </span>
+            </div>
+            <div class="text-xs space-y-1">
+              <p class="text-gray-600"><span class="font-medium">N° Série:</span> {{ material.serialNumber }}</p>
+              <p class="text-gray-600"><span class="font-medium">Localisation:</span> {{ material.location }}</p>
+              <p v-if="material.assignedTo" class="text-gray-600"><span class="font-medium">Assigné à:</span> {{ material.assignedTo }}</p>
+            </div>
+            <div class="flex gap-2 pt-2 border-t">
+              <Button size="sm" variant="ghost" class="flex-1">
+                <Edit2 class="h-3 w-3 mr-1" />
+                <span class="text-xs">Modifier</span>
+              </Button>
+              <Button size="sm" variant="ghost" @click="handleDelete(material.id)" class="flex-1">
+                <Trash2 class="h-3 w-3 mr-1" />
+                <span class="text-xs">Supprimer</span>
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Message vide mobile -->
+      <Card v-if="filteredMaterials.length === 0" class="border-dashed">
+        <CardContent class="pt-12 pb-12 text-center">
+          <Package class="mx-auto h-10 w-10 text-gray-400" />
+          <h3 class="mt-4 text-sm font-medium text-gray-900">Aucun matériel trouvé</h3>
+          <p class="mt-2 text-xs text-gray-600">Ajoutez du matériel à votre inventaire.</p>
+          <Button class="mt-4 w-full" size="sm">
+            <Plus class="mr-2 h-3 w-3" />
+            <span class="text-xs">Ajouter du matériel</span>
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   </div>
 </template>

@@ -108,30 +108,30 @@ const handleDelete = (id: number) => {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4 sm:space-y-6">
     <!-- Header -->
-    <div class="flex items-center justify-between">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-900">Projets</h1>
-        <p class="mt-1 text-gray-600">Gérez et suivez tous vos projets en un seul endroit.</p>
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="flex-1">
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Projets</h1>
+        <p class="mt-1 text-sm sm:text-base text-gray-600">Gérez et suivez tous vos projets en un seul endroit.</p>
       </div>
-      <Button v-if="hasPermission('manage_projects')" size="lg">
-        <Plus class="mr-2 h-4 w-4" />
-        Nouveau Projet
+      <Button v-if="hasPermission('manage_projects')" size="sm" class="w-full sm:w-auto">
+        <Plus class="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+        <span class="text-sm">Nouveau Projet</span>
       </Button>
     </div>
 
     <!-- Filtres et recherche -->
     <Card>
-      <CardContent class="pt-6">
-        <div class="flex gap-4">
+      <CardContent class="pt-4 sm:pt-6">
+        <div class="flex gap-2 sm:gap-4">
           <div class="relative flex-1">
-            <Search class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+            <Search class="absolute left-2 sm:left-3 top-1/2 h-3 w-3 sm:h-4 sm:w-4 -translate-y-1/2 text-gray-400" />
             <Input
               v-model="searchQuery"
               type="text"
               placeholder="Rechercher un projet..."
-              class="pl-10"
+              class="pl-8 sm:pl-10 text-sm"
             />
           </div>
         </div>
@@ -139,56 +139,56 @@ const handleDelete = (id: number) => {
     </Card>
 
     <!-- Liste des projets -->
-    <div class="grid gap-4">
+    <div class="grid gap-3 sm:gap-4">
       <Card v-for="project in filteredProjects" :key="project.id" class="hover:shadow-lg transition-shadow">
-        <CardHeader class="pb-3">
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
-              <div class="flex items-center gap-2">
-                <CardTitle>{{ project.name }}</CardTitle>
-                <span :class="getStatusColor(project.status)" class="rounded-full px-2 py-1 text-xs font-medium">
+        <CardHeader class="pb-2 sm:pb-3">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2">
+                <CardTitle class="text-base sm:text-lg truncate">{{ project.name }}</CardTitle>
+                <span :class="getStatusColor(project.status)" class="rounded-full px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium w-fit">
                   {{ project.status }}
                 </span>
               </div>
-              <CardDescription class="mt-2">{{ project.description }}</CardDescription>
+              <CardDescription class="mt-1 sm:mt-2 text-xs sm:text-sm line-clamp-2">{{ project.description }}</CardDescription>
             </div>
-            <div v-if="hasPermission('manage_projects')" class="flex gap-2">
-              <Button size="sm" variant="ghost">
-                <Edit2 class="h-4 w-4" />
+            <div v-if="hasPermission('manage_projects')" class="flex gap-1 sm:gap-2 flex-shrink-0">
+              <Button size="sm" variant="ghost" class="h-7 w-7 sm:h-8 sm:w-8 p-0">
+                <Edit2 class="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
-              <Button size="sm" variant="ghost" @click="handleDelete(project.id)">
-                <Trash2 class="h-4 w-4" />
+              <Button size="sm" variant="ghost" @click="handleDelete(project.id)" class="h-7 w-7 sm:h-8 sm:w-8 p-0">
+                <Trash2 class="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </div>
           </div>
         </CardHeader>
         <CardContent>
-          <div class="space-y-4">
+          <div class="space-y-3 sm:space-y-4">
             <!-- Informations du projet -->
-            <div class="grid grid-cols-3 gap-4 text-sm">
+            <div class="grid grid-cols-3 gap-2 sm:gap-4 text-xs sm:text-sm">
               <div>
-                <p class="text-gray-600">Date de début</p>
-                <p class="font-medium">{{ new Date(project.startDate).toLocaleDateString('fr-FR') }}</p>
+                <p class="text-gray-600 text-[10px] sm:text-xs">Date de début</p>
+                <p class="font-medium text-xs sm:text-sm">{{ new Date(project.startDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) }}</p>
               </div>
               <div>
-                <p class="text-gray-600">Date de fin</p>
-                <p class="font-medium">{{ new Date(project.endDate).toLocaleDateString('fr-FR') }}</p>
+                <p class="text-gray-600 text-[10px] sm:text-xs">Date de fin</p>
+                <p class="font-medium text-xs sm:text-sm">{{ new Date(project.endDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) }}</p>
               </div>
               <div>
-                <p class="text-gray-600">Équipe</p>
-                <p class="font-medium">{{ project.team_size }} membres</p>
+                <p class="text-gray-600 text-[10px] sm:text-xs">Équipe</p>
+                <p class="font-medium text-xs sm:text-sm">{{ project.team_size }} membres</p>
               </div>
             </div>
 
             <!-- Barre de progression -->
             <div>
-              <div class="mb-2 flex items-center justify-between text-sm">
+              <div class="mb-1.5 sm:mb-2 flex items-center justify-between text-xs sm:text-sm">
                 <span class="text-gray-600">Progression</span>
                 <span class="font-medium">{{ project.progress }}%</span>
               </div>
-              <div class="h-2 rounded-full bg-gray-200">
+              <div class="h-1.5 sm:h-2 rounded-full bg-gray-200">
                 <div
-                  class="h-2 rounded-full bg-blue-600 transition-all"
+                  class="h-1.5 sm:h-2 rounded-full bg-blue-600 transition-all"
                   :style="{ width: project.progress + '%' }"
                 />
               </div>
@@ -196,8 +196,8 @@ const handleDelete = (id: number) => {
 
             <!-- Actions -->
             <div class="flex gap-2 pt-2">
-              <Button variant="outline" size="sm" class="flex-1">Détails</Button>
-              <Button variant="outline" size="sm" class="flex-1">Équipe</Button>
+              <Button variant="outline" size="sm" class="flex-1 text-xs sm:text-sm">Détails</Button>
+              <Button variant="outline" size="sm" class="flex-1 text-xs sm:text-sm">Équipe</Button>
             </div>
           </div>
         </CardContent>
@@ -205,12 +205,12 @@ const handleDelete = (id: number) => {
 
       <!-- Message vide -->
       <Card v-if="filteredProjects.length === 0" class="border-dashed">
-        <CardContent class="pt-12 pb-12 text-center">
-          <LayoutDashboard class="mx-auto h-12 w-12 text-gray-400" />
-          <h3 class="mt-4 text-lg font-medium text-gray-900">Aucun projet trouvé</h3>
-          <p class="mt-2 text-gray-600">Créez votre premier projet pour commencer.</p>
-          <Button class="mt-4">
-            <Plus class="mr-2 h-4 w-4" />
+        <CardContent class="pt-8 sm:pt-12 pb-8 sm:pb-12 text-center">
+          <LayoutDashboard class="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" />
+          <h3 class="mt-3 sm:mt-4 text-base sm:text-lg font-medium text-gray-900">Aucun projet trouvé</h3>
+          <p class="mt-2 text-sm sm:text-base text-gray-600">Créez votre premier projet pour commencer.</p>
+          <Button class="mt-3 sm:mt-4 w-full sm:w-auto text-sm">
+            <Plus class="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
             Créer un projet
           </Button>
         </CardContent>

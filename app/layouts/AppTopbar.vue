@@ -4,6 +4,8 @@ import { Separator } from '@/components/ui/separator'
 import { ref } from 'vue'
 import { LogOut, Settings, User } from 'lucide-vue-next'
 import { useRBAC } from '@/composables/useRBAC'
+import { useAuth } from '@/composables/useAuth'
+import UserProfile from '@/components/UserProfile.vue'
 
 const { currentUser, logout } = useAuth()
 const { getRoleLabel } = useRBAC()
@@ -26,37 +28,53 @@ const handleSettings = () => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-40 w-full border-b bg-white">
-    <div class="flex h-16 items-center gap-4 px-6">
-      <!-- Sidebar Toggle -->
+  <header class="flex h-14 sm:h-16 shrink-0 items-center gap-1 sm:gap-2 border-b bg-background px-2 sm:px-4">
+    <div class="flex items-center gap-1 sm:gap-2">
       <SidebarTrigger class="-ml-1" />
-      
-      <Separator orientation="vertical" class="h-6" />
-      
-      <!-- App Title -->
-      <div class="flex-1">
-        <span class="text-sm font-semibold text-gray-700">Parata - Gestion de Projets</span>
-      </div>
+      <Separator orientation="vertical" class="h-6 mr-1 sm:mr-2 hidden sm:block" />
 
-      <!-- User Menu -->
-      <ClientOnly>
+    </div>
+    
+    <!-- App Title -->
+    <div class="flex flex-1 items-center gap-2">
+      <span class="text-xs sm:text-sm md:text-base font-semibold truncate">Gestion de Projets</span>
+    </div>
+
+    <!-- User Menu -->
+    <ClientOnly>
         <div v-if="currentUser" class="relative">
           <button
             @click="showUserMenu = !showUserMenu"
-            class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-gray-100 transition-colors"
+            class="flex items-center gap-1 sm:gap-2 rounded-lg px-2 sm:px-3 py-2 text-sm hover:bg-gray-100 transition-colors"
           >
             <img
               :src="currentUser.avatar"
               :alt="currentUser.name"
-              class="h-8 w-8 rounded-full"
+              class="h-7 w-7 sm:h-8 sm:w-8 rounded-full flex-shrink-0"
             />
-            <div class="hidden md:block">
-              <p class="font-medium text-gray-900">{{ currentUser.name }}</p>
+            <div class="hidden lg:block">
+              <p class="font-medium text-gray-900 text-xs sm:text-sm">{{ currentUser.name }}</p>
               <p class="text-xs text-gray-600">{{ getRoleLabel(currentUser.role) }}</p>
             </div>
           </button>
 
-          <!-- User Menu Dropdown -->
+          <!-- Backdrop overlay - MUST be before menu -->
+          <Transition
+            enter-active-class="transition ease-out duration-100"
+            enter-from-class="transform opacity-0"
+            enter-to-class="transform opacity-100"
+            leave-active-class="transition ease-in duration-75"
+            leave-from-class="transform opacity-100"
+            leave-to-class="transform opacity-0"
+          >
+            <div
+              v-if="showUserMenu"
+              class="fixed inset-0 z-30"
+              @click="showUserMenu = false"
+            />
+          </Transition>
+
+          <!-- Menu dropdown -->
           <Transition
             enter-active-class="transition ease-out duration-100"
             enter-from-class="transform opacity-0 scale-95"
@@ -67,7 +85,7 @@ const handleSettings = () => {
           >
             <div
               v-show="showUserMenu"
-              class="absolute right-0 mt-1 w-48 rounded-lg border border-gray-200 bg-white shadow-lg"
+              class="absolute right-0 mt-1 w-56 sm:w-64 rounded-lg border border-gray-200 bg-white shadow-lg z-40"
             >
               <div class="border-b border-gray-100 px-4 py-3">
                 <p class="font-medium text-gray-900">{{ currentUser.name }}</p>
@@ -97,24 +115,7 @@ const handleSettings = () => {
               </button>
             </div>
           </Transition>
-
-          <!-- Backdrop -->
-          <Transition
-            enter-active-class="transition ease-out duration-100"
-            enter-from-class="transform opacity-0"
-            enter-to-class="transform opacity-100"
-            leave-active-class="transition ease-in duration-75"
-            leave-from-class="transform opacity-100"
-            leave-to-class="transform opacity-0"
-          >
-            <div
-              v-if="showUserMenu"
-              class="fixed inset-0 z-30"
-              @click="showUserMenu = false"
-            />
-          </Transition>
         </div>
       </ClientOnly>
-    </div>
   </header>
 </template>

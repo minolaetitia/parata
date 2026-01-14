@@ -1,25 +1,12 @@
 <script setup lang="ts">
-import AppSidebar from './AppSidebar.vue'
-import AppTopbar from './AppTopbar.vue'
-import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
+import { SidebarProvider } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/ui/sidebar/AppSidebar.vue";
+import MainLayout from "@/layouts/MainLayout.vue";
 </script>
 
 <template>
-  <SidebarProvider>
+  <SidebarProvider :default-open="false" class="min-h-screen">
     <AppSidebar />
-    <SidebarInset>
-      <AppTopbar />
-      <main class="flex-1 overflow-y-auto">
-        <div class="p-6">
-          <slot />
-        </div>
-      </main>
-    </SidebarInset>
+    <MainLayout />
   </SidebarProvider>
 </template>
-
-<style scoped>
-main {
-  min-height: calc(100vh - 64px);
-}
-</style>

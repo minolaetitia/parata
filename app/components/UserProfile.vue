@@ -1,26 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { LogOut, Settings, User } from 'lucide-vue-next'
-import { useRBAC } from '@/composables/useRBAC'
+import { ref } from "vue";
+import { LogOut, Settings, User } from "lucide-vue-next";
+import { useRBAC } from "@/composables/useRBAC";
 
-const { currentUser, logout } = useAuth()
-const { getRoleLabel } = useRBAC()
-const showMenu = ref(false)
+const { currentUser, logout } = useAuth();
+const { getRoleLabel } = useRBAC();
+const showMenu = ref(false);
 
 const handleLogout = () => {
-  logout()
-  navigateTo('/login')
-}
+  logout();
+  navigateTo("/login");
+};
 
 const handleProfile = () => {
-  showMenu.value = false
-  console.log('Naviguer vers le profil')
-}
+  showMenu.value = false;
+};
 
 const handleSettings = () => {
-  showMenu.value = false
-  console.log('Naviger vers les paramètres')
-}
+  showMenu.value = false;
+};
 </script>
 
 <template>
@@ -33,7 +31,7 @@ const handleSettings = () => {
         <img
           :src="currentUser.avatar"
           :alt="currentUser.name"
-          class="h-8 w-8 rounded-full flex-shrink-0"
+          class="h-8 w-8 rounded-full shrink-0"
         />
         <div class="flex-1 min-w-0">
           <p class="text-sm font-medium text-gray-900 truncate">
@@ -75,7 +73,9 @@ const handleSettings = () => {
             class="fixed bottom-20 left-4 right-4 z-50 w-56 rounded-lg border border-gray-200 bg-white shadow-lg md:left-auto"
           >
             <div class="px-3 py-2">
-              <p class="text-xs font-semibold text-gray-500 uppercase">Mon compte</p>
+              <p class="text-xs font-semibold text-gray-500 uppercase">
+                Mon compte
+              </p>
             </div>
             <button
               @click="handleProfile"

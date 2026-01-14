@@ -102,73 +102,73 @@ const handleDelete = (id: number) => {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4 sm:space-y-6">
     <!-- Header -->
-    <div class="flex items-center justify-between">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-900">Collaborateurs</h1>
-        <p class="mt-1 text-gray-600">Gérez vos développeurs, chefs de projet et équipe.</p>
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="flex-1">
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Collaborateurs</h1>
+        <p class="mt-1 text-sm sm:text-base text-gray-600">Gérez vos développeurs, chefs de projet et équipe.</p>
       </div>
-      <Button v-if="hasPermission('manage_users')" size="lg">
-        <Plus class="mr-2 h-4 w-4" />
-        Ajouter un collaborateur
+      <Button v-if="hasPermission('manage_users')" size="sm" class="w-full sm:w-auto">
+        <Plus class="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+        <span class="text-sm">Ajouter un collaborateur</span>
       </Button>
     </div>
 
     <!-- Filtres et recherche -->
     <Card>
-      <CardContent class="pt-6">
+      <CardContent class="pt-4 sm:pt-6">
         <div class="relative">
-          <Search class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <Search class="absolute left-2 sm:left-3 top-1/2 h-3 w-3 sm:h-4 sm:w-4 -translate-y-1/2 text-gray-400" />
           <Input
             v-model="searchQuery"
             type="text"
             placeholder="Rechercher par nom, email ou rôle..."
-            class="pl-10"
+            class="pl-8 sm:pl-10 text-sm"
           />
         </div>
       </CardContent>
     </Card>
 
     <!-- Vue en grille des collaborateurs -->
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
+    <div class="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-2">
       <Card
         v-for="member in filteredMembers"
         :key="member.id"
         class="hover:shadow-lg transition-shadow"
       >
-        <CardHeader class="pb-3">
-          <div class="flex items-start justify-between">
-            <div class="flex items-center gap-3">
-              <div class="text-3xl">{{ member.avatar }}</div>
-              <div>
-                <CardTitle>{{ member.name }}</CardTitle>
-                <CardDescription>{{ member.role }}</CardDescription>
+        <CardHeader class="pb-2 sm:pb-3">
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+              <div class="text-2xl sm:text-3xl flex-shrink-0">{{ member.avatar }}</div>
+              <div class="min-w-0 flex-1">
+                <CardTitle class="text-base sm:text-lg truncate">{{ member.name }}</CardTitle>
+                <CardDescription class="text-xs sm:text-sm truncate">{{ member.role }}</CardDescription>
               </div>
             </div>
-            <div v-if="hasPermission('manage_users')" class="flex gap-2">
-              <Button size="sm" variant="ghost">
-                <Edit2 class="h-4 w-4" />
+            <div v-if="hasPermission('manage_users')" class="flex gap-1 sm:gap-2 flex-shrink-0">
+              <Button size="sm" variant="ghost" class="h-7 w-7 sm:h-8 sm:w-8 p-0">
+                <Edit2 class="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
-              <Button size="sm" variant="ghost" @click="handleDelete(member.id)">
-                <Trash2 class="h-4 w-4" />
+              <Button size="sm" variant="ghost" @click="handleDelete(member.id)" class="h-7 w-7 sm:h-8 sm:w-8 p-0">
+                <Trash2 class="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent class="space-y-4">
+        <CardContent class="space-y-3 sm:space-y-4">
           <!-- Infos de contact -->
-          <div class="space-y-2">
-            <div class="flex items-center gap-2 text-sm">
-              <Mail class="h-4 w-4 text-gray-400" />
-              <a :href="`mailto:${member.email}`" class="text-blue-600 hover:underline">
+          <div class="space-y-1.5 sm:space-y-2">
+            <div class="flex items-center gap-2 text-xs sm:text-sm">
+              <Mail class="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 flex-shrink-0" />
+              <a :href="`mailto:${member.email}`" class="text-blue-600 hover:underline truncate">
                 {{ member.email }}
               </a>
             </div>
-            <div class="flex items-center gap-2 text-sm">
-              <Activity class="h-4 w-4 text-gray-400" />
-              <span :class="getStatusColor(member.status)" class="rounded-full px-2 py-1 text-xs font-medium">
+            <div class="flex items-center gap-2 text-xs sm:text-sm">
+              <Activity class="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 flex-shrink-0" />
+              <span :class="getStatusColor(member.status)" class="rounded-full px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium">
                 {{ member.status }}
               </span>
             </div>
@@ -176,12 +176,12 @@ const handleDelete = (id: number) => {
 
           <!-- Compétences -->
           <div>
-            <p class="mb-2 text-sm font-medium text-gray-700">Compétences</p>
+            <p class="mb-1.5 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Compétences</p>
             <div class="flex flex-wrap gap-1">
               <span
                 v-for="skill in member.skills"
                 :key="skill"
-                class="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800"
+                class="rounded-full bg-blue-100 px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs text-blue-800"
               >
                 {{ skill }}
               </span>
@@ -189,14 +189,14 @@ const handleDelete = (id: number) => {
           </div>
 
           <!-- Statistiques -->
-          <div class="grid grid-cols-2 gap-4 border-t pt-4">
+          <div class="grid grid-cols-2 gap-3 sm:gap-4 border-t pt-3 sm:pt-4">
             <div>
-              <p class="text-xs text-gray-600">Projets assignés</p>
-              <p class="text-2xl font-bold text-gray-900">{{ member.projects }}</p>
+              <p class="text-[10px] sm:text-xs text-gray-600">Projets assignés</p>
+              <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ member.projects }}</p>
             </div>
             <div>
-              <p class="text-xs text-gray-600">Depuis le</p>
-              <p class="text-sm font-medium text-gray-900">
+              <p class="text-[10px] sm:text-xs text-gray-600">Depuis le</p>
+              <p class="text-xs sm:text-sm font-medium text-gray-900">
                 {{ new Date(member.joinDate).toLocaleDateString('fr-FR') }}
               </p>
             </div>
@@ -204,8 +204,8 @@ const handleDelete = (id: number) => {
 
           <!-- Actions -->
           <div class="flex gap-2 pt-2">
-            <Button variant="outline" size="sm" class="flex-1">Profil</Button>
-            <Button variant="outline" size="sm" class="flex-1">Historique</Button>
+            <Button variant="outline" size="sm" class="flex-1 text-xs sm:text-sm">Profil</Button>
+            <Button variant="outline" size="sm" class="flex-1 text-xs sm:text-sm">Historique</Button>
           </div>
         </CardContent>
       </Card>
@@ -213,13 +213,13 @@ const handleDelete = (id: number) => {
 
     <!-- Message vide -->
     <Card v-if="filteredMembers.length === 0" class="border-dashed">
-      <CardContent class="pt-12 pb-12 text-center">
-        <Briefcase class="mx-auto h-12 w-12 text-gray-400" />
-        <h3 class="mt-4 text-lg font-medium text-gray-900">Aucun collaborateur trouvé</h3>
-        <p class="mt-2 text-gray-600">Commencez à ajouter des membres à votre équipe.</p>
-        <Button class="mt-4">
-          <Plus class="mr-2 h-4 w-4" />
-          Ajouter un collaborateur
+      <CardContent class="pt-8 sm:pt-12 pb-8 sm:pb-12 text-center">
+        <Briefcase class="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" />
+        <h3 class="mt-3 sm:mt-4 text-base sm:text-lg font-medium text-gray-900">Aucun collaborateur trouvé</h3>
+        <p class="mt-2 text-sm sm:text-base text-gray-600">Commencez à ajouter des membres à votre équipe.</p>
+        <Button class="mt-3 sm:mt-4 w-full sm:w-auto">
+          <Plus class="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+          <span class="text-sm">Ajouter un collaborateur</span>
         </Button>
       </CardContent>
     </Card>

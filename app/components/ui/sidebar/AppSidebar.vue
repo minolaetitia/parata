@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { LayoutDashboard, Users, Package, History } from 'lucide-vue-next'
+import { LayoutDashboard, Users, Package, History } from "lucide-vue-next";
 import {
+  Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
@@ -9,41 +10,41 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
-} from '@/components/ui/sidebar'
-import UserProfile from '@/components/UserProfile.vue'
+} from "@/components/ui/sidebar";
+import UserProfile from "@/components/UserProfile.vue";
 
 // Menu items.
 const items = [
   {
-    title: 'Tableau de bord',
-    url: '/',
+    title: "Tableau de bord",
+    url: "/",
     icon: LayoutDashboard,
   },
   {
-    title: 'Projets',
-    url: '/projects',
+    title: "Projets",
+    url: "/projects",
     icon: LayoutDashboard,
   },
   {
-    title: 'Collaborateurs',
-    url: '/team',
+    title: "Collaborateurs",
+    url: "/team",
     icon: Users,
   },
   {
-    title: 'Stock matériel',
-    url: '/materials',
+    title: "Stock matériel",
+    url: "/materials",
     icon: Package,
   },
   {
-    title: 'Historique',
-    url: '/history',
+    title: "Historique",
+    url: "/history",
     icon: History,
   },
-]
+];
 </script>
 
 <template>
-  <div>
+  <Sidebar variant="sidebar" collapsible="icon">
     <SidebarContent>
       <SidebarGroup>
         <SidebarGroupLabel>Navigation</SidebarGroupLabel>
@@ -61,8 +62,8 @@ const items = [
         </SidebarGroupContent>
       </SidebarGroup>
     </SidebarContent>
-    <SidebarFooter>
+    <!-- <SidebarFooter>
       <UserProfile />
-    </SidebarFooter>
-  </div>
+    </SidebarFooter> -->
+  </Sidebar>
 </template>

@@ -35,93 +35,94 @@ const teamMembers = [
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4 sm:space-y-6">
     <!-- Header avec accueil -->
-    <div class="flex items-center justify-between">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-900">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+      <div class="flex-1">
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 line-clamp-2">
           Bienvenue, {{ currentUser?.name }}! 👋
         </h1>
-        <p class="mt-2 text-gray-600">
+        <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">
           Voici un aperçu de votre activité et de vos projets.
         </p>
       </div>
-      <div v-if="hasPermission('manage_projects')" class="flex gap-2">
-        <Button>
-          <Plus class="mr-2 h-4 w-4" />
-          Nouveau Projet
+      <div v-if="hasPermission('manage_projects')" class="flex gap-2 w-full sm:w-auto">
+        <Button class="w-full sm:w-auto text-sm">
+          <Plus class="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+          <span class="hidden sm:inline">Nouveau Projet</span>
+          <span class="sm:hidden">Nouveau</span>
         </Button>
       </div>
     </div>
 
     <!-- Statistiques principales -->
-    <div class="grid gap-4 md:grid-cols-4">
+    <div class="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
       <!-- Projets -->
       <Card>
-        <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle class="text-sm font-medium">Projets</CardTitle>
-          <LayoutDashboard class="h-4 w-4 text-blue-600" />
+        <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
+          <CardTitle class="text-xs sm:text-sm font-medium">Projets</CardTitle>
+          <LayoutDashboard class="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
         </CardHeader>
         <CardContent>
-          <div class="text-2xl font-bold">{{ projectStats.total }}</div>
-          <p class="text-xs text-gray-600">{{ projectStats.active }} en cours</p>
+          <div class="text-xl sm:text-2xl font-bold">{{ projectStats.total }}</div>
+          <p class="text-[10px] sm:text-xs text-gray-600">{{ projectStats.active }} en cours</p>
         </CardContent>
       </Card>
 
       <!-- Équipe -->
       <Card>
-        <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle class="text-sm font-medium">Collaborateurs</CardTitle>
-          <Users class="h-4 w-4 text-green-600" />
+        <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
+          <CardTitle class="text-xs sm:text-sm font-medium">Collaborateurs</CardTitle>
+          <Users class="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
         </CardHeader>
         <CardContent>
-          <div class="text-2xl font-bold">{{ teamMembers.length }}</div>
-          <p class="text-xs text-gray-600">Actifs sur la plateforme</p>
+          <div class="text-xl sm:text-2xl font-bold">{{ teamMembers.length }}</div>
+          <p class="text-[10px] sm:text-xs text-gray-600">Actifs sur la plateforme</p>
         </CardContent>
       </Card>
 
       <!-- Stock matériel -->
       <Card>
-        <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle class="text-sm font-medium">Stock Matériel</CardTitle>
-          <Package class="h-4 w-4 text-yellow-600" />
+        <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
+          <CardTitle class="text-xs sm:text-sm font-medium">Stock Matériel</CardTitle>
+          <Package class="h-3 w-3 sm:h-4 sm:w-4 text-yellow-600" />
         </CardHeader>
         <CardContent>
-          <div class="text-2xl font-bold">{{ materialStats.total }}</div>
-          <p class="text-xs text-gray-600">{{ materialStats.available }} disponibles</p>
+          <div class="text-xl sm:text-2xl font-bold">{{ materialStats.total }}</div>
+          <p class="text-[10px] sm:text-xs text-gray-600">{{ materialStats.available }} disponibles</p>
         </CardContent>
       </Card>
 
       <!-- Tendance -->
       <Card>
-        <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle class="text-sm font-medium">Activité</CardTitle>
-          <TrendingUp class="h-4 w-4 text-red-600" />
+        <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
+          <CardTitle class="text-xs sm:text-sm font-medium">Activité</CardTitle>
+          <TrendingUp class="h-3 w-3 sm:h-4 sm:w-4 text-red-600" />
         </CardHeader>
         <CardContent>
-          <div class="text-2xl font-bold">+24%</div>
-          <p class="text-xs text-gray-600">Vs. la semaine dernière</p>
+          <div class="text-xl sm:text-2xl font-bold">+24%</div>
+          <p class="text-[10px] sm:text-xs text-gray-600">Vs. la semaine dernière</p>
         </CardContent>
       </Card>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2">
+    <div class="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
       <!-- Projets récents -->
       <Card>
         <CardHeader>
-          <CardTitle>Projets Récents</CardTitle>
-          <CardDescription>Vos 3 derniers projets</CardDescription>
+          <CardTitle class="text-base sm:text-lg">Projets Récents</CardTitle>
+          <CardDescription class="text-xs sm:text-sm">Vos 3 derniers projets</CardDescription>
         </CardHeader>
         <CardContent>
-          <div class="space-y-4">
+          <div class="space-y-3 sm:space-y-4">
             <div
               v-for="project in recentProjects"
               :key="project.id"
-              class="flex items-center justify-between border-b pb-3 last:border-0"
+              class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b pb-3 last:border-0"
             >
-              <div class="flex-1">
-                <h4 class="font-medium text-gray-900">{{ project.name }}</h4>
-                <p class="text-xs text-gray-600">
+              <div class="flex-1 w-full">
+                <h4 class="font-medium text-sm sm:text-base text-gray-900">{{ project.name }}</h4>
+                <p class="text-[10px] sm:text-xs text-gray-600 mt-0.5">
                   {{ project.team_size }} membres • {{ project.due_date }}
                 </p>
               </div>
@@ -131,42 +132,42 @@ const teamMembers = [
                   'bg-gray-100 text-gray-800': project.status === 'Planifié',
                   'bg-blue-100 text-blue-800': project.status === 'Complété',
                 }"
-                class="rounded-full px-2 py-1 text-xs font-medium"
+                class="rounded-full px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium whitespace-nowrap"
               >
                 {{ project.status }}
               </span>
             </div>
           </div>
-          <Button variant="outline" class="mt-4 w-full">Voir tous les projets</Button>
+          <Button variant="outline" class="mt-3 sm:mt-4 w-full text-sm">Voir tous les projets</Button>
         </CardContent>
       </Card>
 
       <!-- Équipe -->
       <Card>
         <CardHeader>
-          <CardTitle>Équipe</CardTitle>
-          <CardDescription>Vos collaborateurs actuels</CardDescription>
+          <CardTitle class="text-base sm:text-lg">Équipe</CardTitle>
+          <CardDescription class="text-xs sm:text-sm">Vos collaborateurs actuels</CardDescription>
         </CardHeader>
         <CardContent>
-          <div class="space-y-4">
+          <div class="space-y-3 sm:space-y-4">
             <div
               v-for="member in teamMembers"
               :key="member.id"
               class="flex items-center justify-between border-b pb-3 last:border-0"
             >
-              <div class="flex items-center gap-3">
-                <div class="text-2xl">{{ member.avatar }}</div>
-                <div>
-                  <h4 class="font-medium text-gray-900">{{ member.name }}</h4>
-                  <p class="text-xs text-gray-600">{{ member.role }}</p>
+              <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                <div class="text-xl sm:text-2xl flex-shrink-0">{{ member.avatar }}</div>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-medium text-sm sm:text-base text-gray-900 truncate">{{ member.name }}</h4>
+                  <p class="text-[10px] sm:text-xs text-gray-600 truncate">{{ member.role }}</p>
                 </div>
               </div>
-              <span class="text-xs font-medium text-gray-600">
+              <span class="text-[10px] sm:text-xs font-medium text-gray-600 ml-2 whitespace-nowrap">
                 {{ member.projects }} proj.
               </span>
             </div>
           </div>
-          <Button variant="outline" class="mt-4 w-full">Gérer l'équipe</Button>
+          <Button variant="outline" class="mt-3 sm:mt-4 w-full text-sm">Gérer l'équipe</Button>
         </CardContent>
       </Card>
     </div>

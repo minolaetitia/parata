@@ -154,42 +154,42 @@ const getTypeColor = (type: string) => {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4 sm:space-y-6">
     <!-- Header -->
     <div>
-      <h1 class="text-3xl font-bold text-gray-900">Historique & Traçabilité</h1>
-      <p class="mt-1 text-gray-600">
+      <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Historique & Traçabilité</h1>
+      <p class="mt-1 text-sm sm:text-base text-gray-600">
         Consultez l'historique complet de toutes les actions et modifications.
       </p>
     </div>
 
     <!-- Filtres -->
     <Card>
-      <CardContent class="pt-6">
-        <div class="space-y-4">
+      <CardContent class="pt-4 sm:pt-6">
+        <div class="space-y-3 sm:space-y-4">
           <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">Rechercher</label>
+            <label class="mb-1 sm:mb-2 block text-xs sm:text-sm font-medium text-gray-700">Rechercher</label>
             <div class="relative">
-              <Search class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Search class="absolute left-2 sm:left-3 top-1/2 h-3 w-3 sm:h-4 sm:w-4 -translate-y-1/2 text-gray-400" />
               <Input
                 v-model="searchQuery"
                 type="text"
                 placeholder="Titre, description, utilisateur..."
-                class="pl-10"
+                class="pl-8 sm:pl-10 text-sm"
               />
             </div>
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">Type d'événement</label>
-            <div class="flex flex-wrap gap-2">
+            <label class="mb-1 sm:mb-2 block text-xs sm:text-sm font-medium text-gray-700">Type d'événement</label>
+            <div class="flex flex-wrap gap-1.5 sm:gap-2">
               <button
                 @click="filterType = null"
                 :class="{
                   'bg-blue-600 text-white': filterType === null,
                   'bg-gray-200 text-gray-700 hover:bg-gray-300': filterType !== null,
                 }"
-                class="rounded px-3 py-1 text-sm font-medium transition-colors"
+                class="rounded px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium transition-colors"
               >
                 Tous
               </button>
@@ -201,7 +201,7 @@ const getTypeColor = (type: string) => {
                   'bg-blue-600 text-white': filterType === type.value,
                   'bg-gray-200 text-gray-700 hover:bg-gray-300': filterType !== type.value,
                 }"
-                class="rounded px-3 py-1 text-sm font-medium transition-colors"
+                class="rounded px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium transition-colors"
               >
                 {{ type.label }}
               </button>
@@ -212,48 +212,48 @@ const getTypeColor = (type: string) => {
     </Card>
 
     <!-- Timeline d'historique -->
-    <div class="space-y-4">
-      <div v-if="filteredHistory.length === 0" class="text-center py-12">
-        <Clock class="mx-auto h-12 w-12 text-gray-400" />
-        <h3 class="mt-4 text-lg font-medium text-gray-900">Aucun événement trouvé</h3>
-        <p class="mt-2 text-gray-600">Essayez d'ajuster vos critères de recherche.</p>
+    <div class="space-y-3 sm:space-y-4">
+      <div v-if="filteredHistory.length === 0" class="text-center py-8 sm:py-12">
+        <Clock class="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" />
+        <h3 class="mt-3 sm:mt-4 text-base sm:text-lg font-medium text-gray-900">Aucun événement trouvé</h3>
+        <p class="mt-2 text-sm sm:text-base text-gray-600">Essayez d'ajuster vos critères de recherche.</p>
       </div>
 
-      <div v-else class="space-y-4">
+      <div v-else class="space-y-3 sm:space-y-4">
         <div
           v-for="(event, index) in filteredHistory"
           :key="event.id"
           class="relative"
         >
-          <!-- Timeline connector -->
+          <!-- Timeline connector - Hidden on mobile -->
           <div
             v-if="index < filteredHistory.length - 1"
-            class="absolute left-4 top-12 h-12 w-0.5 bg-gray-200"
+            class="absolute left-3 sm:left-4 top-12 h-12 w-0.5 bg-gray-200 hidden sm:block"
           />
 
           <!-- Event card -->
           <Card :class="getTypeColor(event.type)">
-            <CardContent class="pt-6">
-              <div class="flex gap-4">
+            <CardContent class="pt-4 sm:pt-6">
+              <div class="flex gap-2 sm:gap-4">
                 <!-- Icon -->
-                <div class="text-3xl flex-shrink-0">{{ event.icon }}</div>
+                <div class="text-xl sm:text-3xl flex-shrink-0">{{ event.icon }}</div>
 
                 <!-- Content -->
                 <div class="flex-1 min-w-0">
-                  <div class="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 class="font-semibold text-gray-900">{{ event.title }}</h3>
-                      <p class="mt-1 text-sm text-gray-700">{{ event.description }}</p>
+                  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-semibold text-sm sm:text-base text-gray-900 line-clamp-2">{{ event.title }}</h3>
+                      <p class="mt-1 text-xs sm:text-sm text-gray-700 line-clamp-2">{{ event.description }}</p>
                     </div>
-                    <span class="text-xs font-medium text-gray-600 flex-shrink-0">
+                    <span class="text-[10px] sm:text-xs font-medium text-gray-600 flex-shrink-0">
                       {{ formatDate(event.timestamp) }}
                     </span>
                   </div>
 
                   <!-- Footer avec utilisateur -->
-                  <div class="mt-3 flex items-center gap-2 text-xs text-gray-600">
-                    <User class="h-3 w-3" />
-                    <span>{{ event.user }}</span>
+                  <div class="mt-2 sm:mt-3 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-600">
+                    <User class="h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0" />
+                    <span class="truncate">{{ event.user }}</span>
                   </div>
                 </div>
               </div>
@@ -266,10 +266,10 @@ const getTypeColor = (type: string) => {
     <!-- Info supplementaire -->
     <Card class="bg-blue-50 border-blue-200">
       <CardHeader>
-        <CardTitle class="text-blue-900">📌 À propos de l'historique</CardTitle>
+        <CardTitle class="text-blue-900 text-sm sm:text-base">📌 À propos de l'historique</CardTitle>
       </CardHeader>
-      <CardContent class="text-sm text-blue-800">
-        <ul class="list-inside space-y-1">
+      <CardContent class="text-xs sm:text-sm text-blue-800">
+        <ul class="list-inside space-y-0.5 sm:space-y-1">
           <li>✓ Tous les changements sont enregistrés automatiquement</li>
           <li>✓ Horodatage précis avec fuseau horaire UTC+1</li>
           <li>✓ Identification de l'utilisateur pour chaque action</li>

@@ -64,13 +64,13 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="flex min-h-screen items-center justify-center bg-gray-900 p-4">
+  <div class="flex min-h-screen items-center justify-center bg-gray-900 p-3 sm:p-4">
     <Card class="w-full max-w-md shadow-2xl">
-      <CardHeader class="space-y-2 text-center">
-        <div class="mb-4 flex justify-center">
-          <div class="rounded-lg bg-blue-600 p-3">
+      <CardHeader class="space-y-2 text-center px-4 sm:px-6">
+        <div class="mb-3 sm:mb-4 flex justify-center">
+          <div class="rounded-lg bg-blue-600 p-2 sm:p-3">
             <svg
-              class="h-8 w-8 text-white"
+              class="h-6 w-6 sm:h-8 sm:w-8 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -84,20 +84,21 @@ definePageMeta({
             </svg>
           </div>
         </div>
-        <CardTitle class="text-2xl font-bold">Parata</CardTitle>
-        <CardDescription>Gestion de Projets & Stock Matériel</CardDescription>
+        <CardTitle class="text-xl sm:text-2xl font-bold">Parata</CardTitle>
+        <CardDescription class="text-sm">Gestion de Projets & Stock Matériel</CardDescription>
       </CardHeader>
 
-      <CardContent class="space-y-4">
+      <CardContent class="space-y-3 sm:space-y-4 px-4 sm:px-6">
         <!-- Formulaire d'entrée -->
-        <div class="space-y-3">
+        <div class="space-y-2 sm:space-y-3">
           <div>
-            <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="fullName" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
               Nom complet
             </label>
             <Input
               id="fullName"
               v-model="fullName"
+              class="text-sm"
               type="text"
               placeholder="Votre nom et prénom"
               @keyup.enter="handleGoogleSignIn"
@@ -105,7 +106,7 @@ definePageMeta({
             />
           </div>
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="email" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
               Adresse email
             </label>
             <Input
@@ -115,6 +116,7 @@ definePageMeta({
               placeholder="vous@example.com"
               @keyup.enter="handleGoogleSignIn"
               :disabled="isLoading"
+              class="text-sm"
             />
           </div>
         </div>
@@ -122,11 +124,11 @@ definePageMeta({
         <!-- Bouton Google Sign-In -->
         <Button
           @click="handleGoogleClick"
-          class="w-full"
+          class="w-full text-sm"
           variant="outline"
           :disabled="isLoading"
         >
-          <svg class="mr-2 h-4 w-4" viewBox="0 0 24 24">
+          <svg class="mr-2 h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 24 24">
             <path
               fill="currentColor"
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -149,18 +151,18 @@ definePageMeta({
         </Button>
 
         <!-- Test accounts dropdown -->
-        <div v-if="showTestEmails" class="space-y-2 rounded-lg border border-blue-200 bg-blue-50 p-3">
-          <p class="text-xs font-semibold text-blue-900">Comptes de test (pour démo):</p>
-          <div class="space-y-2">
+        <div v-if="showTestEmails" class="space-y-2 rounded-lg border border-blue-200 bg-blue-50 p-2 sm:p-3">
+          <p class="text-[10px] sm:text-xs font-semibold text-blue-900">Comptes de test (pour démo):</p>
+          <div class="space-y-1.5 sm:space-y-2">
             <button
               v-for="account in testAccounts"
               :key="account.email"
               @click="selectTestAccount(account)"
-              class="w-full rounded border border-blue-300 bg-white px-3 py-2 text-left text-sm hover:bg-blue-50 transition-colors"
+              class="w-full rounded border border-blue-300 bg-white px-2 sm:px-3 py-1.5 sm:py-2 text-left text-xs sm:text-sm hover:bg-blue-50 transition-colors"
               :disabled="isLoading"
             >
-              <div class="font-medium text-gray-900">{{ account.name }}</div>
-              <div class="text-xs text-gray-600">
+              <div class="font-medium text-gray-900 text-xs sm:text-sm">{{ account.name }}</div>
+              <div class="text-[10px] sm:text-xs text-gray-600 truncate">
                 {{ account.email }} • {{ account.role }}
               </div>
             </button>
@@ -168,7 +170,7 @@ definePageMeta({
         </div>
 
         <!-- Informations de sécurité -->
-        <div class="rounded-lg bg-gray-50 p-3 text-center text-xs text-gray-600">
+        <div class="rounded-lg bg-gray-50 p-2 sm:p-3 text-center text-[10px] sm:text-xs text-gray-600">
           <p>🔒 Connexion sécurisée via Google OAuth 2.0</p>
           <p class="mt-1">Vos données sont protégées et chiffrées.</p>
         </div>
