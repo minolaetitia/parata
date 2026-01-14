@@ -5,7 +5,6 @@ import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 
 <template>
   <SidebarProvider>
-    <AppSidebar />
     <main class="flex-1">
       <div class="flex items-center gap-4 border-b bg-white p-4">
         <SidebarTrigger />
