@@ -33,8 +33,8 @@ export interface Project {
   name: string
   description: string
   status: 'Planifié' | 'En cours' | 'Complété' | 'En attente'
-  startDate: string
-  endDate: string
+  startDate: string // Format YYYY-MM-DD
+  endDate: string   // Format YYYY-MM-DD
   team_size: number
   progress: number
 }
@@ -48,7 +48,7 @@ export interface TeamMember {
   status: 'Actif' | 'Inactif' | 'Congé' | 'Archivé'
   projects: number
   skills: string[]
-  joinDate: string
+  joinDate: string // Format YYYY-MM-DD
   avatar: string
 }
 
@@ -61,8 +61,8 @@ export interface Material {
   status: 'Disponible' | 'Attribué' | 'HS' | 'En réparation'
   location: string
   assignedTo: string | null
-  assignedDate: string | null
-  purchaseDate: string
+  assignedDate: string | null // Format ISO
+  purchaseDate: string        // Format YYYY-MM-DD
 }
 
 // Événement d'historique
