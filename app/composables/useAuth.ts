@@ -1,3 +1,4 @@
+import { ref, readonly, onMounted } from 'vue'
 import type { AuthUser, UserRole } from '@/lib/types'
 
 // État global d'authentification (mock)
