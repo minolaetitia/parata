@@ -3,9 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Search, Clock, User, Package, FileText } from 'lucide-vue-next'
 
-definePageMeta({
-  middleware: ['auth', 'rbac'],
-})
+// Protection gérée par le plugin client auth-guard.client.ts
 
 const searchQuery = ref('')
 const filterType = ref<string | null>(null)
