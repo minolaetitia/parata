@@ -13,9 +13,7 @@ import {
   AlertCircle,
 } from 'lucide-vue-next'
 
-definePageMeta({
-  middleware: ['auth', 'rbac'],
-})
+// Protection gérée par le plugin client auth-guard.client.ts
 
 const { hasPermission } = useAuth()
 const searchQuery = ref('')
