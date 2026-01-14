@@ -8,7 +8,7 @@ export interface AuthUser {
   name: string
   avatar?: string
   role: UserRole
-  createdAt: Date
+  createdAt: number // Timestamp pour éviter les problèmes de sérialisation
 }
 
 // Permissions granulaires
