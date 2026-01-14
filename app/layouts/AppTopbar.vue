@@ -50,7 +50,7 @@ const handleSettings = () => {
             <img
               :src="currentUser.avatar"
               :alt="currentUser.name"
-              class="h-7 w-7 sm:h-8 sm:w-8 rounded-full flex-shrink-0"
+              class="h-7 w-7 sm:h-8 sm:w-8 rounded-full shrink-0"
             />
             <div class="hidden lg:block">
               <p class="font-medium text-gray-900 text-xs sm:text-sm">{{ currentUser.name }}</p>
