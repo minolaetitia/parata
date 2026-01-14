@@ -1,14 +1,13 @@
 export default defineNuxtPlugin((nuxtApp) => {
-  // Vérifier que nous sommes côté client
-  if (process.server) return
-
+  // Ce plugin s'exécute SEULEMENT côté client (suffixe .client.ts)
   try {
     const router = useRouter()
     const { isAuthenticated, checkAuth } = useAuth()
     const { canAccessPage } = useRBAC()
 
-    // Initialiser l'auth au démarrage
-    if (typeof checkAuth === 'function') {
+    // Initialiser l'authentification au démarrage
+    // Attendre le mount complet avant de lire localStorage
+    if (typeof window !== 'undefined') {
       checkAuth()
     }
 
@@ -16,11 +15,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     router.beforeEach((to, from, next) => {
       try {
-        // Initialiser l'authentification
-        if (typeof checkAuth === 'function') {
-          checkAuth()
-        }
-
         // Routes publiques
         if (publicRoutes.includes(to.path)) {
           if (isAuthenticated.value) {
