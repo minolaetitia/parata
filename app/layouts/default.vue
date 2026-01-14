@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import AppSidebar from './AppSidebar.vue'
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import AppTopbar from './AppTopbar.vue'
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
 </script>
 
 <template>
   <SidebarProvider>
     <AppSidebar />
-    <main class="flex-1">
-      <div class="flex items-center gap-4 border-b bg-white p-4">
-        <SidebarTrigger />
-        <div class="ml-auto flex items-center gap-4">
-          <span class="text-sm font-medium text-gray-700">Parata - Gestion de Projets</span>
+    <SidebarInset>
+      <AppTopbar />
+      <main class="flex-1 overflow-y-auto">
+        <div class="p-6">
+          <slot />
         </div>
-      </div>
-      <div class="p-6">
-        <slot />
-      </div>
-    </main>
+      </main>
+    </SidebarInset>
   </SidebarProvider>
 </template>
+
+<style scoped>
+main {
+  min-height: calc(100vh - 64px);
+}
+</style>
