@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
+  devtools: { enabled: false }, // Désactivé pour éviter erreurs cross-origin en iframe
   css: ["~/assets/css/main.css"],
 
   // Auto-imports explicites
