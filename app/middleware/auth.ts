@@ -1,4 +1,6 @@
 export default defineRouteMiddleware((to, from) => {
+  if (process.server) return
+
   const { isAuthenticated } = useAuth()
 
   // Les routes publiques
