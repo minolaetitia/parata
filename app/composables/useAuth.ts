@@ -124,6 +124,7 @@ export function useAuth() {
     isLoading: readonly(isLoading),
     loginWithGoogle,
     logout,
+    checkAuth,
     hasRole,
     hasPermission,
   }
