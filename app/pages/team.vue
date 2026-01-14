@@ -4,9 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Plus, Search, Edit2, Trash2, Mail, Briefcase, Activity } from 'lucide-vue-next'
 
-definePageMeta({
-  middleware: ['auth', 'rbac'],
-})
+// Protection gérée par le plugin client auth-guard.client.ts
 
 const { hasPermission } = useAuth()
 const searchQuery = ref('')
