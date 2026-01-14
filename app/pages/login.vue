@@ -64,7 +64,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 p-4">
+  <div class="flex min-h-screen items-center justify-center bg-gray-900 p-4">
     <Card class="w-full max-w-md shadow-2xl">
       <CardHeader class="space-y-2 text-center">
         <div class="mb-4 flex justify-center">
@@ -178,7 +178,5 @@ definePageMeta({
 </template>
 
 <style scoped>
-:deep(.dark) {
-  @apply bg-gradient-to-br from-slate-950 to-slate-900;
-}
+/* Styling sans classes Tailwind invalides */
 </style>
