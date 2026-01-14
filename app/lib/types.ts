@@ -72,7 +72,7 @@ export interface HistoryEvent {
   title: string
   description: string
   user: string
-  timestamp: string
+  timestamp: string // Format ISO: "2025-01-18T11:30:00"
   icon: string
 }
 
