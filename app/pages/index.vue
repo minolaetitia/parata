@@ -3,9 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { LayoutDashboard, Users, Package, TrendingUp, Plus } from 'lucide-vue-next'
 
-definePageMeta({
-  middleware: ['auth', 'rbac'],
-})
+// Protection gérée par le plugin client auth-guard.client.ts
 
 const { currentUser, hasPermission } = useAuth()
 
