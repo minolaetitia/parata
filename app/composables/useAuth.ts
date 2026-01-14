@@ -5,6 +5,7 @@ import type { AuthUser, UserRole } from '@/lib/types'
 const currentUser = ref<AuthUser | null>(null)
 const isAuthenticated = ref(false)
 const isLoading = ref(false)
+let authInitialized = false
 
 export function useAuth() {
   // Mapper les emails aux rôles (pour la démo)
@@ -36,7 +37,7 @@ export function useAuth() {
       currentUser.value = user
       isAuthenticated.value = true
 
-      // Simuler stockage de session
+      // Simuler stockage de session - SEULEMENT côté client
       if (process.client) {
         localStorage.setItem('auth_user', JSON.stringify(user))
       }
@@ -60,16 +61,23 @@ export function useAuth() {
   }
 
   // Vérifier si l'utilisateur est connecté (utile pour l'hydratation)
+  // SEULEMENT côté client, et seulement une fois
   const checkAuth = () => {
-    if (process.client) {
-      const stored = localStorage.getItem('auth_user')
-      if (stored) {
-        try {
-          currentUser.value = JSON.parse(stored)
-          isAuthenticated.value = true
-        } catch {
-          logout()
-        }
+    // Ne pas exécuter côté serveur
+    if (process.server) return
+    
+    // Ne pas réinitialiser si déjà fait
+    if (authInitialized) return
+    authInitialized = true
+    
+    const stored = localStorage.getItem('auth_user')
+    if (stored) {
+      try {
+        const user = JSON.parse(stored)
+        currentUser.value = user
+        isAuthenticated.value = true
+      } catch {
+        logout()
       }
     }
   }
@@ -112,11 +120,6 @@ export function useAuth() {
     
     return permissions[currentUser.value.role]?.includes(permission) ?? false
   }
-
-  // Initialiser l'authentification au mount
-  onMounted(() => {
-    checkAuth()
-  })
 
   return {
     currentUser: readonly(currentUser),
