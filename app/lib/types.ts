@@ -81,7 +81,7 @@ export interface Comment {
   id: number
   content: string
   author: string
-  timestamp: string
+  timestamp: string // Format ISO: "2025-01-18T11:30:00"
   resourceType: 'project' | 'material'
   resourceId: number
 }
