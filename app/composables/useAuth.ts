@@ -30,7 +30,7 @@ export function useAuth() {
         name,
         avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
         role: getRoleByEmail(email),
-        createdAt: new Date(),
+        createdAt: Date.now(),
       }
 
       currentUser.value = user
