@@ -264,11 +264,11 @@ const getTypeColor = (type: string) => {
     </div>
 
     <!-- Info supplementaire -->
-    <Card class="bg-blue-50 border-blue-200">
+    <Card class="bg-parata-blue/5 border-parata-blue/20">
       <CardHeader>
-        <CardTitle class="text-blue-900 text-sm sm:text-base">📌 À propos de l'historique</CardTitle>
+        <CardTitle class="text-parata-blue text-sm sm:text-base">📌 À propos de l'historique</CardTitle>
       </CardHeader>
-      <CardContent class="text-xs sm:text-sm text-blue-800">
+      <CardContent class="text-xs sm:text-sm text-parata-blue-dark">
         <ul class="list-inside space-y-0.5 sm:space-y-1">
           <li>✓ Tous les changements sont enregistrés automatiquement</li>
           <li>✓ Horodatage précis avec fuseau horaire UTC+1</li>

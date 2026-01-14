@@ -64,13 +64,13 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="flex min-h-screen items-center justify-center bg-gray-900 p-3 sm:p-4">
+  <div class="flex min-h-screen items-center justify-center bg-parata-blue-dark p-3 sm:p-4">
     <Card class="w-full max-w-md shadow-2xl">
       <CardHeader class="space-y-2 text-center px-4 sm:px-6">
         <div class="mb-3 sm:mb-4 flex justify-center">
-          <div class="rounded-lg bg-blue-600 p-2 sm:p-3">
+          <div class="rounded-lg bg-parata-blue p-2 sm:p-3">
             <svg
-              class="h-6 w-6 sm:h-8 sm:w-8 text-white"
+              class="h-6 w-6 sm:h-8 sm:w-8 text-parata-gold"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ definePageMeta({
             </svg>
           </div>
         </div>
-        <CardTitle class="text-xl sm:text-2xl font-bold">Parata</CardTitle>
+        <CardTitle class="text-xl sm:text-2xl font-bold text-parata-blue">Parata</CardTitle>
         <CardDescription class="text-sm">Gestion de Projets & Stock Matériel</CardDescription>
       </CardHeader>
 
@@ -124,8 +124,7 @@ definePageMeta({
         <!-- Bouton Google Sign-In -->
         <Button
           @click="handleGoogleClick"
-          class="w-full text-sm"
-          variant="outline"
+          class="w-full text-sm bg-parata-gold hover:bg-parata-gold-dark text-parata-blue border-0"
           :disabled="isLoading"
         >
           <svg class="mr-2 h-3 w-3 sm:h-4 sm:w-4" viewBox="0 0 24 24">
@@ -170,7 +169,7 @@ definePageMeta({
         </div>
 
         <!-- Informations de sécurité -->
-        <div class="rounded-lg bg-gray-50 p-2 sm:p-3 text-center text-[10px] sm:text-xs text-gray-600">
+        <div class="rounded-lg bg-parata-blue/5 border border-parata-blue/20 p-2 sm:p-3 text-center text-[10px] sm:text-xs text-parata-blue">
           <p>🔒 Connexion sécurisée via Google OAuth 2.0</p>
           <p class="mt-1">Vos données sont protégées et chiffrées.</p>
         </div>

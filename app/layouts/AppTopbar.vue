@@ -37,7 +37,7 @@ const handleSettings = () => {
     
     <!-- App Title -->
     <div class="flex flex-1 items-center gap-2">
-      <span class="text-xs sm:text-sm md:text-base font-semibold truncate">Gestion de Projets</span>
+      <span class="text-xs sm:text-sm md:text-base font-semibold truncate text-parata-blue">Gestion de Projets</span>
     </div>
 
     <!-- User Menu -->

@@ -162,10 +162,10 @@ const handleDelete = (id: number) => {
     <div class="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
       <Card>
         <CardHeader class="pb-1 sm:pb-2">
-          <CardTitle class="text-xs sm:text-sm font-medium">Total</CardTitle>
+          <CardTitle class="text-xs sm:text-sm font-medium text-parata-blue">Total</CardTitle>
         </CardHeader>
         <CardContent>
-          <div class="text-xl sm:text-2xl font-bold">{{ materialCount.total }}</div>
+          <div class="text-xl sm:text-2xl font-bold text-parata-blue">{{ materialCount.total }}</div>
           <p class="text-[10px] sm:text-xs text-gray-600">Éléments en stock</p>
         </CardContent>
       </Card>
@@ -180,10 +180,10 @@ const handleDelete = (id: number) => {
       </Card>
       <Card>
         <CardHeader class="pb-1 sm:pb-2">
-          <CardTitle class="text-xs sm:text-sm font-medium text-blue-800">Attribué</CardTitle>
+          <CardTitle class="text-xs sm:text-sm font-medium text-parata-gold-dark">Attribué</CardTitle>
         </CardHeader>
         <CardContent>
-          <div class="text-xl sm:text-2xl font-bold text-blue-600">{{ materialCount.assigned }}</div>
+          <div class="text-xl sm:text-2xl font-bold text-parata-gold">{{ materialCount.assigned }}</div>
           <p class="text-[10px] sm:text-xs text-gray-600">Actuellement utilisé</p>
         </CardContent>
       </Card>

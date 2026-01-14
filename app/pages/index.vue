@@ -61,10 +61,10 @@ const teamMembers = [
       <Card>
         <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
           <CardTitle class="text-xs sm:text-sm font-medium">Projets</CardTitle>
-          <LayoutDashboard class="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
+          <LayoutDashboard class="h-3 w-3 sm:h-4 sm:w-4 text-parata-blue" />
         </CardHeader>
         <CardContent>
-          <div class="text-xl sm:text-2xl font-bold">{{ projectStats.total }}</div>
+          <div class="text-xl sm:text-2xl font-bold text-parata-blue">{{ projectStats.total }}</div>
           <p class="text-[10px] sm:text-xs text-gray-600">{{ projectStats.active }} en cours</p>
         </CardContent>
       </Card>
@@ -73,10 +73,10 @@ const teamMembers = [
       <Card>
         <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
           <CardTitle class="text-xs sm:text-sm font-medium">Collaborateurs</CardTitle>
-          <Users class="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+          <Users class="h-3 w-3 sm:h-4 sm:w-4 text-parata-gold" />
         </CardHeader>
         <CardContent>
-          <div class="text-xl sm:text-2xl font-bold">{{ teamMembers.length }}</div>
+          <div class="text-xl sm:text-2xl font-bold text-parata-blue">{{ teamMembers.length }}</div>
           <p class="text-[10px] sm:text-xs text-gray-600">Actifs sur la plateforme</p>
         </CardContent>
       </Card>
@@ -85,10 +85,10 @@ const teamMembers = [
       <Card>
         <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
           <CardTitle class="text-xs sm:text-sm font-medium">Stock Matériel</CardTitle>
-          <Package class="h-3 w-3 sm:h-4 sm:w-4 text-yellow-600" />
+          <Package class="h-3 w-3 sm:h-4 sm:w-4 text-parata-gold" />
         </CardHeader>
         <CardContent>
-          <div class="text-xl sm:text-2xl font-bold">{{ materialStats.total }}</div>
+          <div class="text-xl sm:text-2xl font-bold text-parata-blue">{{ materialStats.total }}</div>
           <p class="text-[10px] sm:text-xs text-gray-600">{{ materialStats.available }} disponibles</p>
         </CardContent>
       </Card>
@@ -97,7 +97,7 @@ const teamMembers = [
       <Card>
         <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-1 sm:pb-2">
           <CardTitle class="text-xs sm:text-sm font-medium">Activité</CardTitle>
-          <TrendingUp class="h-3 w-3 sm:h-4 sm:w-4 text-red-600" />
+          <TrendingUp class="h-3 w-3 sm:h-4 sm:w-4 text-parata-blue" />
         </CardHeader>
         <CardContent>
           <div class="text-xl sm:text-2xl font-bold">+24%</div>
@@ -173,11 +173,11 @@ const teamMembers = [
     </div>
 
     <!-- Informations supplémentaires -->
-    <Card class="bg-gradient-to-r from-blue-50 to-blue-100">
+    <Card class="bg-gradient-to-r from-parata-blue/5 to-parata-gold/10 border-parata-blue/20">
       <CardHeader>
-        <CardTitle class="text-blue-900">💡 Conseil du jour</CardTitle>
+        <CardTitle class="text-parata-blue">💡 Conseil du jour</CardTitle>
       </CardHeader>
-      <CardContent class="text-sm text-blue-800">
+      <CardContent class="text-sm text-parata-blue-dark">
         Optimisez la traçabilité de votre stock matériel en assignant les articles à des projets.
         Cela vous permettra d'avoir une meilleure visibilité sur vos ressources.
       </CardContent>
