@@ -33,7 +33,22 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ["shadcn-nuxt"],
+  modules: ["shadcn-nuxt", "nuxt-google-auth"],
+
+  runtimeConfig: {
+    public: {
+      googleClientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID,
+    }
+  },
+
+  // Google Auth configuration (module options)
+  // @ts-ignore - nuxt-google-auth module types not yet available
+  googleAuth: {
+    clientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID || '',
+    autoLoadScript: true,
+    promptOneTap: false,
+    enableServerVerify: true
+  },
 
   shadcn: {
     /**

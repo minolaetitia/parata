@@ -1,54 +1,42 @@
-import { ref, readonly, onMounted } from 'vue'
+import { ref } from 'vue'
 import type { AuthUser, UserRole } from '@/lib/types'
 
-// État global d'authentification (mock)
+// État global d'authentification
 const currentUser = ref<AuthUser | null>(null)
 const isAuthenticated = ref(false)
 const isLoading = ref(false)
 let authInitialized = false
 
 export function useAuth() {
-  // Mapper les emails aux rôles (pour la démo)
+  // Mapper les emails aux rôles
   const getRoleByEmail = (email: string): UserRole => {
-    if (email.includes('alice')) return 'admin'
+    if (email.includes('mino')) return 'admin'
     if (email.includes('bob')) return 'chef_projet'
     if (email.includes('charlie')) return 'developpeur'
     if (email.includes('diana') || email.includes('eva')) return 'csm_dt_dta'
     return 'developpeur' // Rôle par défaut
   }
 
-  // Login avec Google (mock)
-  const loginWithGoogle = async (name: string, email: string) => {
-    isLoading.value = true
-    try {
-      // Simulation d'un délai réseau
-      await new Promise(resolve => setTimeout(resolve, 800))
-
-      // Créer un utilisateur mock avec rôle basé sur l'email
-      const user: AuthUser = {
-        id: `user_${Math.random().toString(36).substr(2, 9)}`,
-        email,
-        name,
-        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
-        role: getRoleByEmail(email),
-        createdAt: Date.now(),
-      }
-
-      currentUser.value = user
-      isAuthenticated.value = true
-
-      // Simuler stockage de session - SEULEMENT côté client
-      if (process.client) {
-        localStorage.setItem('auth_user', JSON.stringify(user))
-      }
-
-      return user
-    } catch (error) {
-      console.error('Erreur lors de la connexion:', error)
-      throw error
-    } finally {
-      isLoading.value = false
+  // Handle Google Sign-In success
+  const handleGoogleSignIn = (googleClaims: any) => {
+    const user: AuthUser = {
+      id: googleClaims.sub,
+      email: googleClaims.email,
+      name: googleClaims.name || googleClaims.email,
+      avatar: googleClaims.picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${googleClaims.email}`,
+      role: getRoleByEmail(googleClaims.email),
+      createdAt: Date.now(),
     }
+
+    currentUser.value = user
+    isAuthenticated.value = true
+
+    // Stocker localement
+    if (process.client) {
+      localStorage.setItem('auth_user', JSON.stringify(user))
+    }
+
+    return user
   }
 
   // Logout
@@ -60,13 +48,9 @@ export function useAuth() {
     }
   }
 
-  // Vérifier si l'utilisateur est connecté (utile pour l'hydratation)
-  // SEULEMENT côté client, et seulement une fois
+  // Vérifier si l'utilisateur est connecté
   const checkAuth = () => {
-    // Ne pas exécuter côté serveur
     if (process.server) return
-    
-    // Ne pas réinitialiser si déjà fait
     if (authInitialized) return
     authInitialized = true
     
@@ -125,7 +109,7 @@ export function useAuth() {
     currentUser: readonly(currentUser),
     isAuthenticated: readonly(isAuthenticated),
     isLoading: readonly(isLoading),
-    loginWithGoogle,
+    handleGoogleSignIn,
     logout,
     checkAuth,
     hasRole,
